@@ -1,0 +1,13 @@
+.header {
+  padding: 2ch 1ch 1ch;
+  margin-block-end: 1ch;
+}
+
+.logo-container {
+  position: relative;
+  height: 70px;
+}
+
+.logo-container img {
+  object-fit: contain;
+}

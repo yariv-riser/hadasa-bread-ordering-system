@@ -1,0 +1,37 @@
+.order-form {
+  display: grid;
+  grid-template-rows: repeat(5, auto);
+  grid-template-columns: 1fr;
+  gap: 1ch;
+}
+
+.input-group {
+  display: grid;
+  grid-template-areas:
+    "label input";
+  grid-template-rows: 1fr;
+  grid-template-columns: auto 1fr;
+  gap: 1ch;
+}
+
+.input-group:last-of-type {
+  margin-bottom: 1ch;
+}
+
+.input-group label {
+  grid-area: label;
+  place-self: end;
+  white-space: nowrap;
+}
+
+.input-group input {
+  grid-area: input;
+  place-self: end stretch;
+  width: 100%;
+}
+
+.success-msg,
+.fail-msg {
+  text-align: center;
+  padding-block-end: 20px;
+}

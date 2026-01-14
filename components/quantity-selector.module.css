@@ -1,0 +1,22 @@
+.quantity-selector {
+  display: flex;
+}
+
+.quantity-selector input[type="number"] {
+  font-size: clamp(26px, 2.6vw, 30px);
+  width: 4ch;
+  padding-inline-start: 1ch;
+  text-align: center;
+  border-bottom: 0;
+}
+
+@media (max-width: 530px) and (hover: none) and (pointer: coarse) {
+  .quantity-selector input[type="number"] {
+    padding-inline-start: 0;
+  }
+}
+
+.quantity-selector button {
+  padding: 7px 7px 5px;
+  border-radius: 100%;
+}

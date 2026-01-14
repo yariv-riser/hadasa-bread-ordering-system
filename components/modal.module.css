@@ -1,0 +1,36 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.modal {
+  font-size: clamp(26px, 2.6vw, 30px);
+  width: 100%;
+  max-width: 450px;
+  background: #fff;
+  padding: 1rem 1rem 1.5rem;
+  margin: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: end;
+}
+
+.modal-close {
+  background-color: transparent;
+  color: var(--foreground);
+  padding: 5px;
+}
+
+button.modal-close:hover {
+  background-color: transparent;
+}

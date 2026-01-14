@@ -1,0 +1,52 @@
+.order-summary {
+  grid-area: order-summary;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto auto auto;
+  gap: .5ch;
+
+  font-size: clamp(26px, 2.6vw, 30px);
+  padding: 1ch;
+  background-color: var(--card-background);
+  border: solid var(--foreground);
+  border-radius: 20px;
+  box-shadow: 0 0 10px -5px #999;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5ch;
+
+  margin-block-start: .5ch;
+  margin-block-end: 1ch;
+}
+
+.summary-item {
+  list-style: none;
+}
+
+.no-items-msg {
+  text-align: center;
+  font-size: clamp(26px, 2.6vw, 30px);
+  margin-block: 1ch;
+  align-self: center;
+}
+
+.total-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-total-title {
+  font-size: clamp(35px, 6vw, 40px);
+}
+
+.finish-order-btn {
+  margin-block-start: 1ch;
+}
+
+.payment-msg {
+  text-align: center;
+}
