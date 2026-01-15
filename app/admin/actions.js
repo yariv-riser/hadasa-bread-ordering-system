@@ -16,6 +16,7 @@ export async function saveItem(formData) {
   }
 
   revalidatePath('/admin');
+  revalidatePath('/');
 }
 
 export async function deleteItem(id) {
