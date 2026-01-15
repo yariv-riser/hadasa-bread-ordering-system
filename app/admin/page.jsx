@@ -1,17 +1,19 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { supabase } from '@/lib/supabase';
 import { saveItem, deleteItem } from './actions';
 import { SubmitButton } from '../login/SubmitButton';
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default async function AdminPage() {
 
-  const filePath = path.join(process.cwd(), 'data.json');
-  const fileData = await fs.readFile(filePath, 'utf8');
-  const items = JSON.parse(fileData);
+  const { data: items } = await supabase
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-  // Server Action to handle logout
+  console.log('items', items);
+
   async function logout() {
     'use server';
     const cookieStore = await cookies();
@@ -40,7 +42,6 @@ export default async function AdminPage() {
             <th>שם</th>
             <th>מחיר</th>
             <th>נוסף ב-</th>
-            <th>עודכן ב-</th>
             <th>פעולות</th>
           </tr>
         </thead>
@@ -55,8 +56,7 @@ export default async function AdminPage() {
                   <button type="submit" style={{ marginRight: '5px' }}>עדכן</button>
                 </form>
               </td>
-              <td>{new Date(item.createdAt).toLocaleDateString('he-IL')}</td>
-              <td>{new Date(item.updatedAt).toLocaleDateString('he-IL')}</td>
+              <td>{new Date(item.created_at).toLocaleDateString('he-IL')}</td>
               <td>
                 <form action={deleteItem.bind(null, item.id)} style={{ display: 'inline' }}>
                   <button type="submit" style={{ color: 'red' }}>מחק</button>

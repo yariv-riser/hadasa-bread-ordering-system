@@ -6,16 +6,15 @@ export default function OrderClient({ initialOrders }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // Filter Logic: Search + Date Range
   const filteredOrders = initialOrders.filter(order => {
     const term = search.toLowerCase();
     const orderDate = new Date(order.timestamp).toISOString().split('T')[0]; // Format: YYYY-MM-DD
 
     const matchesSearch = (
-      order.name.toLowerCase().includes(term) ||
-      order.email.toLowerCase().includes(term) ||
-      order.phone.includes(term) ||
-      order.address.toLowerCase().includes(term)
+      order.customer_info.name.toLowerCase().includes(term) ||
+      order.customer_info.email.toLowerCase().includes(term) ||
+      order.customer_info.phone.includes(term) ||
+      order.customer_info.address.toLowerCase().includes(term)
     );
 
     const matchesDate =
