@@ -1,4 +1,4 @@
-'use client'; // This must be a Client Component
+'use client';
 
 import { useFormStatus } from 'react-dom';
 
@@ -9,16 +9,8 @@ export function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      style={{
-        padding: '10px 20px',
-        cursor: pending ? 'not-allowed' : 'pointer',
-        backgroundColor: pending ? '#ccc' : '#0070f3',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px'
-      }}
     >
-      {pending ? 'Logging in...' : 'Login'}
+      {pending ? 'נכנס...' : 'כניסה'}
     </button>
   );
 }

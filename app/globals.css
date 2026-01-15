@@ -99,7 +99,8 @@ button:disabled {
 }
 
 button {
-  line-height: .7;
+  display: block;
+  width: 100%;
   color: white;
   font-size: 30px;
   padding: 12px 0 14px;
@@ -107,6 +108,7 @@ button {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  line-height: .7;
   transition: .1s;
 }
 
@@ -120,11 +122,35 @@ output {
 }
 
 input {
+  width: 100%;
+  background-color: transparent;
   border-width: 0 0 1px 0;
   border-color: var(--foreground);
-  background-color: transparent;
 }
 
 hr {
   border: solid 1px var(--foreground);
+}
+
+form {
+  background-color: var(--card-background);
+  box-shadow: 0 0 10px -5px #999;
+  border-radius: 20px;
+  padding: 1ch;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  border: 0;
+}
+
+legend {
+  margin-block-end: 20px;
+}
+
+.error {
+  color: tomato;
 }
