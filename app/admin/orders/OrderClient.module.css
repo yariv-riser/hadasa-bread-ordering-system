@@ -30,6 +30,11 @@
 }
 
 .orders-table {
+
+  & thead>tr {
+    cursor: auto;
+  }
+
   & tr {
     cursor: pointer;
 
