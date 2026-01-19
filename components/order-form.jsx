@@ -1,10 +1,13 @@
 import { useActionState } from "react";
 import { sendOrderConfirmations } from '@/lib/actions';
+import { useRouter } from 'next/navigation';
+
 
 import OrderFormSubmit from "./order-from-submit";
 import classes from './order-form.module.css';
 
 export default function OrderForm({ selectedQuantities }) {
+  const router = useRouter();
 
   const sendOrderWithProps = async (
     prevState,
@@ -22,7 +25,10 @@ export default function OrderForm({ selectedQuantities }) {
   return (
     <>
       {state.success ? (
-        <p className={classes['success-msg']}>ההזמנה נשלחה בהצלחה!</p>
+        <>
+          <p className={classes['success-msg']}>ההזמנה נשלחה בהצלחה!</p>
+          <button onClick={() => location.reload()}>הזמנה חדשה</button>
+        </>
       ) : state.success === false ? (
         <p className={classes['fail-msg']}>חלה שגיאה, נסו שוב מאוחר יותר</p>
       ) : (

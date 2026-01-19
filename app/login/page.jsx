@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }) {
       const cookieStore = await cookies();
       cookieStore.set('admin_session', 'true', {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
         maxAge: 60 * 60 * 8,
         path: '/',

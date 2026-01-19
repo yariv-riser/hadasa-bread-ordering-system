@@ -1,0 +1,9 @@
+.page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  font-size: clamp(40px, 7vw, 50px);
+  text-align: center;
+}

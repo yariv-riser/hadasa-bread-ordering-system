@@ -1,7 +1,8 @@
 import { supabase } from '@/lib/supabase';
 import OrderClient from './OrderClient';
 
-// This is the magic line that ensures the page is never cached
+import classes from './page.module.css';
+
 export const dynamic = 'force-dynamic';
 
 export default async function AdminOrdersPage() {
@@ -11,8 +12,7 @@ export default async function AdminOrdersPage() {
     .order('created_at', { ascending: false });
 
   if (error) {
-    // In production, you might want to show this to the user
-    return <div style={{ padding: '2rem' }}>שגיאה בטעינת הזמנות: {error.message}</div>;
+    return <div className='error'>שגיאה בטעינת הזמנות</div>;
   }
 
   const formattedOrders = (orders || []).map(order => ({
@@ -22,9 +22,8 @@ export default async function AdminOrdersPage() {
   }));
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>ניהול הזמנות</h1>
+    <main className={classes['page-content']}>
       <OrderClient initialOrders={formattedOrders} />
-    </div>
-  );
+    </main>
+  )
 }

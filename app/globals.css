@@ -27,7 +27,6 @@ html {
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
@@ -35,14 +34,19 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto;
 
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   min-height: 100vh;
 
   font-family: "Bellefair", serif;
   font-weight: 400;
   font-style: normal;
   font-size: clamp(35px, 3.4vw, 40px);
-  line-height: .9;
+  text-align: right;
   color: var(--foreground);
+  padding-inline: 1ch;
+  line-height: .9;
 
   --s: 60px;
   --c1: #ffffff;
@@ -80,13 +84,17 @@ a {
   align-items: center;
   justify-content: center;
   color: inherit;
-  text-decoration: underline;
   text-decoration-thickness: 2px;
+
+  &.active {
+    font-weight: bold;
+    pointer-events: none;
+    text-decoration: none;
+  }
 }
 
 input,
 button {
-  color: inherit;
   direction: inherit;
   font-family: inherit;
 
@@ -103,7 +111,7 @@ button {
   width: 100%;
   color: white;
   font-size: 30px;
-  padding: 12px 0 14px;
+  padding: 12px 12px 14px;
   background-color: var(--cta);
   border: none;
   border-radius: 10px;
@@ -126,17 +134,71 @@ input {
   background-color: transparent;
   border-width: 0 0 1px 0;
   border-color: var(--foreground);
+
+  &[type="date"] {
+    cursor: pointer;
+  }
 }
 
 hr {
   border: solid 1px var(--foreground);
 }
 
-form {
+form,
+table {
   background-color: var(--card-background);
   box-shadow: 0 0 10px -5px #999;
   border-radius: 20px;
   padding: 1ch;
+}
+
+form {
+  overflow: hidden;
+  position: relative;
+
+  &:has(button.pending) {
+    opacity: .4;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  font-weight: inherit;
+  padding: 16px 12px;
+  font-size: clamp(23px, 2.5vw, 30px);
+}
+
+th {
+  color: white;
+  background-color: var(--foreground);
+
+  &:first-child {
+    border-top-right-radius: 20px;
+    padding-inline-start: 12px;
+  }
+
+  &:last-child {
+    border-top-left-radius: 20px;
+  }
+}
+
+tr {
+  border-bottom: solid 1px;
+
+  &:last-child {
+    border: none;
+  }
+}
+
+td button {
+  display: inline-block;
+  width: auto;
+  padding-inline: 20px;
 }
 
 fieldset {
@@ -148,6 +210,11 @@ fieldset {
 }
 
 legend {
+  margin-block-end: 20px;
+}
+
+caption {
+  text-align: inherit;
   margin-block-end: 20px;
 }
 

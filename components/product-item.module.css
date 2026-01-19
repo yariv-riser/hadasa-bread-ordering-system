@@ -1,7 +1,7 @@
 .product-item {
   display: grid;
   grid-template-areas:
-    "header header"
+    "header image"
     "price image"
     "footer image"
   ;
@@ -47,6 +47,7 @@
   grid-area: image;
 
   width: 100%;
+  align-self: end;
 }
 
 @media (max-width: 530px) {

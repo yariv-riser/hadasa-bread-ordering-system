@@ -17,6 +17,7 @@
 }
 
 .quantity-selector button {
+  width: auto;
   padding: 7px 7px 5px;
   border-radius: 100%;
 }

@@ -1,9 +1,10 @@
 import { supabase } from '@/lib/supabase';
 import { saveItem, deleteItem } from './actions';
-import { SubmitButton } from '../login/SubmitButton';
+import { SubmitButton } from './SubmitButton';
+import { UpdateButton } from './UpdateButton';
+import { DeleteButton } from './DeleteButton';
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import classes from './page.module.css';
 
 export default async function AdminPage() {
 
@@ -12,65 +13,42 @@ export default async function AdminPage() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  console.log('items', items);
-
-  async function logout() {
-    'use server';
-    const cookieStore = await cookies();
-    cookieStore.delete('admin_session');
-    redirect('/login');
-  }
-
   return (
-    <main style={{ padding: '2rem', direction: 'rtl', fontFamily: 'sans-serif' }}>
+    <main className={classes['page-content']}>
       <h1>ניהול מוצרים</h1>
 
-      {/* --- ADD NEW ITEM FORM --- */}
-      <section style={{ marginBottom: '3rem', padding: '1rem', border: '1px solid #ccc' }}>
-        <h3>הוסף מוצר חדש</h3>
-        <form action={saveItem} style={{ display: 'flex', gap: '10px' }}>
+      <section className={classes['add-item-section']}>
+        <h3>הוספת מוצר חדש</h3>
+        <form action={saveItem}>
           <input name="name" placeholder="שם המוצר" required />
           <input name="price" type="number" placeholder="מחיר" required />
           <SubmitButton />
         </form>
       </section>
 
-      {/* --- ITEMS LIST --- */}
-      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'right' }}>
-        <thead>
-          <tr style={{ borderBottom: '2px solid #000' }}>
-            <th>שם</th>
-            <th>מחיר</th>
-            <th>נוסף ב-</th>
-            <th>פעולות</th>
-          </tr>
-        </thead>
+      <table className={classes['product-items-table']}>
+        <caption>מוצרים</caption>
         <tbody>
-          {items.map((item) => (
-            <tr key={item.id} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '10px' }}>
-                <form action={saveItem} style={{ display: 'inline' }}>
-                  <input type="hidden" name="id" value={item.id} />
-                  <input name="name" defaultValue={item.name} />
-                  <input name="price" type="number" defaultValue={item.price} style={{ width: '60px' }} />
-                  <button type="submit" style={{ marginRight: '5px' }}>עדכן</button>
-                </form>
-              </td>
-              <td>{new Date(item.created_at).toLocaleDateString('he-IL')}</td>
+          {items.length ? items.map((item) => (
+            <tr key={item.id}>
+
               <td>
-                <form action={deleteItem.bind(null, item.id)} style={{ display: 'inline' }}>
-                  <button type="submit" style={{ color: 'red' }}>מחק</button>
+                <form
+                  action={saveItem}
+                  className={classes['product-edit-form']}
+                >
+                  <input type="hidden" name="id" value={item.id} />
+                  <input required name="name" placeholder='שם המוצר' defaultValue={item.name} />
+                  <input required name="price" placeholder='מחיר' type="number" defaultValue={item.price} />
+                  <UpdateButton />
+                  <DeleteButton handleOnClick={deleteItem.bind(null, item.id)} />
                 </form>
               </td>
+
             </tr>
-          ))}
+          )) : <p className={classes['empty-msg']}>- אין מוצרים -</p>}
         </tbody>
       </table>
-      <form action={logout}>
-        <button type="submit" style={{ padding: '8px 16px', cursor: 'pointer' }}>
-          Logout
-        </button>
-      </form>
     </main >
   );
 }

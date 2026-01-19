@@ -1,14 +1,21 @@
 'use client';
 import { useState } from 'react';
+import { ChevronLeft } from 'lucide-react';
+
+import Modal from '@/components/modal';
+
+import classes from './OrderClient.module.css';
 
 export default function OrderClient({ initialOrders }) {
   const [search, setSearch] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState({});
 
   const filteredOrders = initialOrders.filter(order => {
     const term = search.toLowerCase();
-    const orderDate = new Date(order.timestamp).toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const orderDate = new Date(order.timestamp).toISOString().split('T')[0];
 
     const matchesSearch = (
       order.customer_info.name.toLowerCase().includes(term) ||
@@ -24,87 +31,127 @@ export default function OrderClient({ initialOrders }) {
     return matchesSearch && matchesDate;
   });
 
+  function handleOrderSelection(order) {
+    setSelectedOrder(order);
+    setIsOpen(true);
+  }
+
+  function handleModalClose() {
+    setSelectedOrder('');
+    setIsOpen(false);
+  }
+
+  function today() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
   return (
-    <div style={{ direction: 'rtl', fontFamily: 'sans-serif' }}>
-      {/* --- FILTER BAR --- */}
-      <div style={{
-        marginBottom: '20px',
-        display: 'flex',
-        gap: '15px',
-        flexWrap: 'wrap',
-        background: '#f9f9f9',
-        padding: '15px',
-        borderRadius: '8px'
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label style={{ fontSize: '12px' }}>חיפוש חופשי</label>
+    <>
+      <h1>הזמנות</h1>
+
+      <form className={classes['order-search-form']}>
+
+        <div className={`${classes['input-group']} ${classes['search']}`}>
+          <label>חיפוש</label>
           <input
-            placeholder="שם, טלפון, כתובת..."
+            placeholder="שם/טלפון/כתובת"
             onChange={(e) => setSearch(e.target.value)}
-            style={{ padding: '8px', width: '200px' }}
           />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label style={{ fontSize: '12px' }}>מתאריך</label>
+        <div className={`${classes['input-group']} ${classes['start-date']}`}>
+          <label>מתאריך</label>
           <input
             type="date"
+            max={today()}
             onChange={(e) => setStartDate(e.target.value)}
-            style={{ padding: '8px' }}
           />
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <label style={{ fontSize: '12px' }}>עד תאריך</label>
+        <div className={`${classes['input-group']} ${classes['end-date']}`}>
+          <label>עד תאריך</label>
           <input
             type="date"
+            max={today()}
             onChange={(e) => setEndDate(e.target.value)}
-            style={{ padding: '8px' }}
           />
         </div>
 
-      </div>
+      </form>
 
-      {/* --- RESULTS TABLE --- */}
-      <div style={{ marginTop: '20px' }}>
-        <p>מציג <strong>{filteredOrders.length}</strong> הזמנות</p>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ background: '#7a5a3a', color: 'white' }}>
-              <th style={{ padding: '12px', textAlign: 'right' }}>תאריך ושעה</th>
-              <th style={{ textAlign: 'right' }}>לקוח</th>
-              <th style={{ textAlign: 'right' }}>כתובת</th>
-              <th style={{ textAlign: 'right' }}>פרטי הזמנה</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredOrders.map(order => (
-              <tr key={order.id} style={{ borderBottom: '1px solid #ddd' }}>
-                <td style={{ padding: '12px' }}>
+      <table className={classes['orders-table']}>
+        {filteredOrders.length === 1
+          ? (
+            <caption>מציג הזמנה אחת</caption>
+          )
+          : filteredOrders.length <= 0
+            ? (
+              <caption>אין הזמנות להצגה</caption>
+            ) : (
+              <caption>מציג <strong>{filteredOrders.length}</strong> הזמנות</caption>
+            )
+        }
+        <thead>
+          <tr>
+            <th>מועד ביצוע</th>
+            <th>שם</th>
+            <th>טלפון</th>
+            <th>כתובת</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredOrders.map(order => (
+            <tr className={classes['order-row']} key={order.id} onClick={() => handleOrderSelection(order)}>
+              <td>
+                <span>מועד ביצוע:</span>
+                <span>
                   {new Date(order.timestamp).toLocaleString('he-IL', {
                     dateStyle: 'short',
                     timeStyle: 'short'
                   })}
-                </td>
-                <td>
-                  <strong>{order.name}</strong><br />
-                  {order.phone}
-                </td>
-                <td>{order.address}</td>
-                <td style={{ padding: '10px 0' }}>
-                  <div
-                    style={{ maxHeight: '200px', overflowY: 'auto', border: '1px solid #eee' }}
-                    dangerouslySetInnerHTML={{ __html: order.itemsTableHtml }}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {filteredOrders.length === 0 && (
-          <p style={{ textAlign: 'center', padding: '20px' }}>לא נמצאו הזמנות לטווח שנבחר.</p>
-        )}
-      </div>
-    </div>
+                </span>
+              </td>
+              <td>
+                <span>שם:</span>
+                <span>{order.customer_info.name}</span>
+              </td>
+              <td>
+                <span>טלפון:</span>
+                <a href={`tel:${order.customer_info.phone}`}>{order.customer_info.phone}</a>
+              </td>
+              <td>
+                <span>כתובת:</span>
+                <span>{order.customer_info.address}</span>
+              </td>
+              <td>
+                <ChevronLeft strokeWidth={3} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {isOpen && (
+        <Modal onClose={handleModalClose}>
+          <p>
+            {selectedOrder.customer_info.name}
+            &nbsp;-&nbsp;
+            {new Date(selectedOrder.timestamp).toLocaleString('he-IL', {
+              dateStyle: 'short',
+              timeStyle: 'short'
+            })}
+          </p>
+          <div dangerouslySetInnerHTML={{ __html: selectedOrder.itemsTableHtml }} />
+        </Modal>
+      )}
+      {filteredOrders.length === 0 && (
+        <p style={{ textAlign: 'center', padding: '20px' }}>לא נמצאו הזמנות לטווח שנבחר.</p>
+      )}
+    </>
   );
 }

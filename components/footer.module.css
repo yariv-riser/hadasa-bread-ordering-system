@@ -1,5 +1,5 @@
 .footer {
-  font-size: 25px;
+  font-size: clamp(20px, 3.4vw, 23px);
   margin-block-start: 4ch;
   padding: 1ch 1ch 1.5ch;
   text-align: center;

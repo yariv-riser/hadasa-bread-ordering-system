@@ -1,5 +1,6 @@
 
 import classes from './footer.module.css';
+import Signature from './signature/signature';
 
 export default function Footer() {
 
@@ -8,7 +9,8 @@ export default function Footer() {
 
   return (
     <footer className={classes.footer}>
-      כל הזכויות שמורות ללחם הדסה © {currentYear}
+      <div>כל הזכויות שמורות ללחם הדסה © {currentYear}</div>
+      <Signature />
     </footer>
   )
 }

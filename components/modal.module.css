@@ -26,6 +26,8 @@
 }
 
 .modal-close {
+  display: inline-block;
+  width: auto;
   background-color: transparent;
   color: var(--foreground);
   margin-block-end: 10px;

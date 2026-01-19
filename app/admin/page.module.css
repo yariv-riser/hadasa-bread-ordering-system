@@ -1,0 +1,83 @@
+.page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.add-item-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & form {
+    display: flex;
+    gap: 10px;
+
+    & input[name="name"] {
+      flex: 2;
+    }
+
+    & input[name="price"] {
+      flex: .4;
+    }
+
+    & button {
+      flex: .5;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .add-item-section form {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+.product-items-table {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+
+  background-color: unset;
+  padding: 0;
+  box-shadow: none;
+
+  & td {
+    padding: 0 0 15px;
+  }
+}
+
+@media (max-width: 700px) {
+  .product-items-table {
+    border-spacing: 0 15px;
+  }
+}
+
+.product-edit-form {
+  display: flex;
+  gap: 10px;
+
+  & input[name="name"] {
+    flex: 2;
+  }
+
+  & input[name="price"] {
+    flex: .3;
+  }
+
+  & button {
+    flex: .5;
+  }
+}
+
+@media (max-width: 700px) {
+  .product-edit-form {
+    flex-direction: column;
+    gap: 20px;
+    margin-block-end: 40px;
+  }
+}
+
+.empty-msg {
+  text-align: center;
+}

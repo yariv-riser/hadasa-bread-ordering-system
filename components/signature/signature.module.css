@@ -1,0 +1,50 @@
+.signature {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: clamp(12px, 5vw, 12px);
+
+  color: #111;
+  background-color: white;
+
+  margin: 10px;
+  padding: 7px 10px;
+  border-radius: 10px;
+
+  border: solid 1px #f5f5f5;
+  text-decoration: none;
+  letter-spacing: 1px;
+
+  transition: .6s;
+
+  & img {
+    transform: rotate(0deg);
+    transition: inherit;
+  }
+
+  & .by-label {
+    color: #999;
+    margin-inline-end: 10px;
+  }
+
+  & .logo-label {
+    margin-inline-start: 3px;
+  }
+}
+
+@media (hover: hover) {
+  .signature {
+    transition: .6s;
+
+    &:hover {
+      letter-spacing: 2px;
+      border-color: #444;
+      border-bottom-width: 4px;
+
+      & img {
+        transform: rotate(-360deg);
+      }
+    }
+  }
+}

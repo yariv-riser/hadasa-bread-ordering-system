@@ -1,10 +1,14 @@
 .order-summary {
   grid-area: order-summary;
 
+
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr auto auto auto;
   gap: .5ch;
+
+  position: sticky;
+  top: 1ch;
 
   font-size: clamp(26px, 2.6vw, 30px);
   padding: 1ch;

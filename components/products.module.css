@@ -1,26 +1,12 @@
 .product-list {
   grid-area: products;
 
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1ch;
 }
 
 .product-list li {
+  width: 100%;
   list-style: none;
-}
-
-@media (max-width: 1280px) {
-  .product-list {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-}
-
-@media (max-width: 909px) {
-  .product-list {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-  }
 }

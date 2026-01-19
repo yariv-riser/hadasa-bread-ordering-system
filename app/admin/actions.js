@@ -1,6 +1,8 @@
 'use server';
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function saveItem(formData) {
   const id = formData.get('id');
@@ -8,10 +10,8 @@ export async function saveItem(formData) {
   const price = Number(formData.get('price'));
 
   if (id) {
-    // Update
     await supabase.from('products').update({ name, price }).eq('id', id);
   } else {
-    // Insert
     await supabase.from('products').insert([{ name, price }]);
   }
 
@@ -22,4 +22,10 @@ export async function saveItem(formData) {
 export async function deleteItem(id) {
   await supabase.from('products').delete().eq('id', id);
   revalidatePath('/admin');
+}
+
+export async function logout() {
+  const cookieStore = await cookies();
+  cookieStore.delete('admin_session');
+  redirect('/login');
 }

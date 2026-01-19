@@ -6,7 +6,6 @@ import Products from '@/components/products';
 import OrderSummary from '@/components/order-summary';
 import classes from './page.module.css';
 
-// Accept products as a prop here
 export default function HomeClient({ products }) {
 
   const [quantities, setQuantities] = useState([]);
@@ -30,7 +29,7 @@ export default function HomeClient({ products }) {
     <main className={classes.main}>
       <section className={classes.intro}>
         <p className={classes['welcome-msg']}>
-          שלום!<br />מזמינה אותך לבחור את הלחמ/ים האהובים עליך.
+          שלום!<br />מזמינה אותך לבחור את הלחמים האהובים עליך.
           כולם על בסיס מחמצת שיפון ונעשים בעבודת יד.
         </p>
 
@@ -39,7 +38,6 @@ export default function HomeClient({ products }) {
         </p>
       </section>
 
-      {/* Use the products passed from the server */}
       <Products onProductSelection={handleProductSelection} quantities={quantities} products={products} />
       <OrderSummary selectedQuantities={quantities} products={products} />
     </main>
