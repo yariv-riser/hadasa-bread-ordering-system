@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 
-export function UpdateButton() {
+export default function UpdateButton() {
   const { pending } = useFormStatus();
 
   return (

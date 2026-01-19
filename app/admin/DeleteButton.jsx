@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 
-export function DeleteButton({ handleOnClick }) {
+export default function DeleteButton({ handleOnClick }) {
   const { pending } = useFormStatus();
 
   return (

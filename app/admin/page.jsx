@@ -1,8 +1,9 @@
 import { supabase } from '@/lib/supabase';
 import { saveItem, deleteItem } from './actions';
-import { SubmitButton } from './SubmitButton';
-import { UpdateButton } from './UpdateButton';
-import { DeleteButton } from './DeleteButton';
+
+import SubmitButton from './SubmitButton';
+import UpdateButton from './UpdateButton';
+import DeleteButton from './DeleteButton';
 
 import classes from './page.module.css';
 
