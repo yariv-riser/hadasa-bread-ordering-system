@@ -158,6 +158,7 @@ form {
 
   &:has(button.pending) {
     opacity: .4;
+    pointer-events: none;
   }
 }
 
