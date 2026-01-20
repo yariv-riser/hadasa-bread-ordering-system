@@ -12,7 +12,7 @@
   font-size: clamp(26px, 2.6vw, 30px);
   width: 100%;
   max-width: 450px;
-  background: #fff;
+  background-color: var(--background);
   padding: 1rem 1rem 1.5rem;
   margin: 1rem;
   border-radius: 20px;
