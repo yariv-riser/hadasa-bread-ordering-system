@@ -1,13 +1,10 @@
 import { useActionState } from "react";
 import { sendOrderConfirmations } from '@/lib/actions';
-import { useRouter } from 'next/navigation';
-
 
 import OrderFormSubmit from "./order-from-submit";
 import classes from './order-form.module.css';
 
 export default function OrderForm({ selectedQuantities }) {
-  const router = useRouter();
 
   const sendOrderWithProps = async (
     prevState,
