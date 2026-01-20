@@ -21,7 +21,7 @@ export default function OrderForm({ selectedQuantities }) {
 
   return (
     <>
-      {!state.success ? (
+      {state.success ? (
         <>
           <div className={classes['success-msg']}>
             <p>ההזמנה נשלחה בהצלחה!</p>
