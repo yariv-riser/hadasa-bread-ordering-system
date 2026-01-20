@@ -32,6 +32,9 @@
 
 .success-msg,
 .fail-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   text-align: center;
   padding-block-end: 20px;
 }

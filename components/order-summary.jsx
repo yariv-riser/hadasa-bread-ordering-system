@@ -41,7 +41,6 @@ export default function OrderSummary({ selectedQuantities, products }) {
       </section>
 
       <button className={classes['finish-order-btn']} onClick={() => setIsOpen(true)} disabled={!selectedQuantities.length}>ביצוע הזמנה</button>
-      <p className={classes['payment-msg']}>דרכי התשלום יפורטו בהודעה שתישלח לאחר סיום ההזמנה.</p>
 
       {isOpen && (
         <Modal onClose={() => setIsOpen(false)}>
