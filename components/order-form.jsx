@@ -76,6 +76,15 @@ export default function OrderForm({ selectedQuantities }) {
                 placeholder='רחוב, מספר בית, עיר'
               />
             </div>
+
+            <div className={classes['input-group']}>
+              <label htmlFor="comment" style={{ alignSelf: 'start' }}>הערה</label>
+              <textarea
+                id='comment'
+                name='comment'
+                rows={4}
+              />
+            </div>
             <OrderFormSubmit />
           </form>
         )}

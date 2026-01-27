@@ -51,6 +51,20 @@
   }
 }
 
+.comment {
+  margin-block-start: 20px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+
+  & .comment-body {
+    padding: 10px 10px 15px;
+    background-color: white;
+    border-radius: 15px;
+    border: solid 3px var(--foreground);
+  }
+}
+
 @media (max-width: 800px) {
   .order-search-form {
     grid-template-rows: auto auto;

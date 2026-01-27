@@ -147,6 +147,15 @@ export default function OrderClient({ initialOrders }) {
             })}
           </p>
           <div dangerouslySetInnerHTML={{ __html: selectedOrder.itemsTableHtml }} />
+          {
+            selectedOrder.comment &&
+            <div className={classes['comment']}>
+              <p>הערה:</p>
+              <p className={classes['comment-body']}>
+                {selectedOrder.comment}
+              </p>
+            </div>
+          }
         </Modal>
       )}
       {filteredOrders.length === 0 && (

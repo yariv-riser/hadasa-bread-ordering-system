@@ -63,8 +63,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 h1,
 h2,
 h3 {
@@ -96,7 +94,8 @@ a {
 }
 
 input,
-button {
+button,
+textarea {
   direction: inherit;
   font-family: inherit;
 
@@ -134,12 +133,21 @@ output {
 input {
   width: 100%;
   background-color: transparent;
+  background-color: transparent;
   border-width: 0 0 1px 0;
   border-color: var(--foreground);
 
   &[type="date"] {
     cursor: pointer;
   }
+}
+
+textarea {
+  width: 100%;
+  font-size: inherit;
+  background-color: transparent;
+  border-color: var(--foreground);
+  padding: 5px 10px;
 }
 
 hr {
