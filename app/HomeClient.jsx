@@ -34,7 +34,7 @@ export default function HomeClient({ products }) {
         </p>
 
         <p className={classes['pickup-instructions']}>
-          איסוף הלחמים יתבצע בימי שני וחמישי במאפייה שלי<br /><strong>ברחוב הכלנית, מושב עמיקם</strong>
+          איסוף הלחמים יתבצע בימי שני וחמישי במאפייה שלי<br /><strong><a href="https://maps.google.com/?q=32.564827,35.023335">ברחוב הכלנית, מושב עמיקם</a></strong>
         </p>
       </section>
 
