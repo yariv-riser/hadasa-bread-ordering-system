@@ -51,17 +51,22 @@
   }
 }
 
-.comment {
-  margin-block-start: 20px;
+.order-details {
   display: flex;
-  gap: 10px;
   flex-direction: column;
+  gap: 1ch;
 
-  & .comment-body {
-    padding: 10px 10px 15px;
-    background-color: white;
-    border-radius: 15px;
-    border: solid 3px var(--foreground);
+  & .comment {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+    & .comment-body {
+      padding: 10px 10px 15px;
+      background-color: white;
+      border-radius: 15px;
+      border: solid 3px var(--foreground);
+    }
   }
 }
 
