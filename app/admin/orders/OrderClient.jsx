@@ -138,24 +138,27 @@ export default function OrderClient({ initialOrders }) {
       </table>
       {isOpen && (
         <Modal onClose={handleModalClose}>
-          <p>
-            {selectedOrder.customer_info.name}
-            &nbsp;-&nbsp;
-            {new Date(selectedOrder.timestamp).toLocaleString('he-IL', {
-              dateStyle: 'short',
-              timeStyle: 'short'
-            })}
-          </p>
-          <div dangerouslySetInnerHTML={{ __html: selectedOrder.itemsTableHtml }} />
-          {
-            selectedOrder.comment &&
-            <div className={classes['comment']}>
-              <p>הערה:</p>
-              <p className={classes['comment-body']}>
-                {selectedOrder.comment}
-              </p>
-            </div>
-          }
+          <div className={classes['order-details']}>
+            <p>
+              {selectedOrder.customer_info.name}
+              &nbsp;-&nbsp;
+              {new Date(selectedOrder.timestamp).toLocaleString('he-IL', {
+                dateStyle: 'short',
+                timeStyle: 'short'
+              })}
+            </p>
+            <div dangerouslySetInnerHTML={{ __html: selectedOrder.itemsTableHtml }} />
+            <p>לפרוס: <span>{selectedOrder.sliceToggle ? 'כן' : 'לא'}</span></p>
+            {
+              selectedOrder.comment &&
+              <div className={classes['comment']}>
+                <p>הערה:</p>
+                <p className={classes['comment-body']}>
+                  {selectedOrder.comment}
+                </p>
+              </div>
+            }
+          </div>
         </Modal>
       )}
       {filteredOrders.length === 0 && (

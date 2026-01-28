@@ -1,4 +1,4 @@
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { sendOrderConfirmations } from '@/lib/actions';
 
 import OrderFormSubmit from "./order-from-submit";
@@ -18,6 +18,11 @@ export default function OrderForm({ selectedQuantities }) {
   };
 
   const [state, formAction] = useActionState(sendOrderWithProps, { message: null });
+  const [sliceToggleChecked, setSliceToggleChecked] = useState(true);
+
+  const handleSliceToggleChange = () => {
+    setSliceToggleChecked(!sliceToggleChecked);
+  };
 
   return (
     <>
@@ -84,6 +89,19 @@ export default function OrderForm({ selectedQuantities }) {
                 name='comment'
                 rows={4}
               />
+            </div>
+
+            <div className={`${classes['input-group']} ${classes['slice-toggle']}`}>
+
+              <input
+                type='checkbox'
+                id='sliceToggle'
+                name='sliceToggle'
+                checked={sliceToggleChecked === true}
+                value={sliceToggleChecked ? true : false}
+                onChange={handleSliceToggleChange}
+              />
+              <label htmlFor='sliceToggle'>נא לפרוס את הלחמים</label>
             </div>
             <OrderFormSubmit />
           </form>
