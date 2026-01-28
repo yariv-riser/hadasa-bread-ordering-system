@@ -137,7 +137,10 @@ input {
   border-width: 0 0 1px 0;
   border-color: var(--foreground);
 
-  &[type="date"] {
+  &[type="date"],
+  &[type="radio"],
+  &[type="checkbox"],
+  &+label {
     cursor: pointer;
   }
 }
